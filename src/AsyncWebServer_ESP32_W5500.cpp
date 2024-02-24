@@ -36,6 +36,8 @@
 //////////////////////////////////////////////////////////////
 
 bool ESP32_W5500_eth_connected = false;
+void (*ptrOnConnectCallback)(void);
+void (*ptrOnDisconnectCallback)(void);
 
 void ESP32_W5500_onEvent()
 {
@@ -52,6 +54,13 @@ bool ESP32_W5500_isConnected()
 {
   return ESP32_W5500_eth_connected;
 }
+
+void ESP32_W5500_setCallback_connected(void (*onConnectCallback)()) {
+    ptrOnConnectCallback = onConnectCallback; }
+
+void ESP32_W5500_setCallback_disconnected(void (*onDisconnectCallback)()) {
+    ptrOnDisconnectCallback = onDisconnectCallback; }
+
 
 void ESP32_W5500_event(WiFiEvent_t event)
 {
@@ -90,13 +99,22 @@ void ESP32_W5500_event(WiFiEvent_t event)
         AWS_LOG1(ETH.linkSpeed(), F("Mbps"));
 
         ESP32_W5500_eth_connected = true;
+        
+        if(ptrOnConnectCallback){
+          ptrOnConnectCallback();
+        }
       }
 
       break;
 
     case ARDUINO_EVENT_ETH_DISCONNECTED:
       AWS_LOG("ETH Disconnected");
+
       ESP32_W5500_eth_connected = false;
+
+      if(ptrOnDisconnectCallback){
+          ptrOnDisconnectCallback();
+      }
       break;
 
     case ARDUINO_EVENT_ETH_STOP:
@@ -138,13 +156,22 @@ void ESP32_W5500_event(WiFiEvent_t event)
         AWS_LOG1(ETH.linkSpeed(), F("Mbps"));
 
         ESP32_W5500_eth_connected = true;
+        
+        if(ptrOnConnectCallback){
+          ptrOnConnectCallback();
+      }
       }
 
       break;
 
     case SYSTEM_EVENT_ETH_DISCONNECTED:
       AWS_LOG("ETH Disconnected");
+
       ESP32_W5500_eth_connected = false;
+      
+      if(ptrOnDisconnectCallback){
+          ptrOnDisconnectCallback();
+      }
       break;
 
     case SYSTEM_EVENT_ETH_STOP:

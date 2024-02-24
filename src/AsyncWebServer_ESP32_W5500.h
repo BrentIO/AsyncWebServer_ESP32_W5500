@@ -150,6 +150,10 @@ extern void ESP32_W5500_waitForConnect();
 
 extern bool ESP32_W5500_isConnected();
 
+extern void ESP32_W5500_setCallback_connected(void(*)());
+
+extern void ESP32_W5500_setCallback_disconnected(void(*)());
+
 extern void ESP32_W5500_event(WiFiEvent_t event);
 
 //////////////////////////////////////////////////////////////
