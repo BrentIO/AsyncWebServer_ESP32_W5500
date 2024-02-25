@@ -316,8 +316,8 @@ class AsyncWebSocketClient
     uint32_t _clientId;
     AwsClientStatus _status;
 
-    LinkedList<AsyncWebSocketControl *> _controlQueue;
-    LinkedList<AsyncWebSocketMessage *> _messageQueue;
+    LinkedList_AsyncWebServer<AsyncWebSocketControl *> _controlQueue;
+    LinkedList_AsyncWebServer<AsyncWebSocketMessage *> _messageQueue;
 
     uint8_t _pstate;
     AwsFrameInfo _pinfo;
@@ -454,7 +454,7 @@ AwsEventHandler;
 class AsyncWebSocket: public AsyncWebHandler
 {
   public:
-    typedef LinkedList<AsyncWebSocketClient *> AsyncWebSocketClientLinkedList;
+    typedef LinkedList_AsyncWebServer<AsyncWebSocketClient *> AsyncWebSocketClientLinkedList;
 
   private:
     String _url;
@@ -578,7 +578,7 @@ class AsyncWebSocket: public AsyncWebHandler
     //  messagebuffer functions/objects.
     AsyncWebSocketMessageBuffer * makeBuffer(size_t size = 0);
     AsyncWebSocketMessageBuffer * makeBuffer(uint8_t * data, size_t size);
-    LinkedList<AsyncWebSocketMessageBuffer *> _buffers;
+    LinkedList_AsyncWebServer<AsyncWebSocketMessageBuffer *> _buffers;
     void _cleanBuffers();
 
     AsyncWebSocketClientLinkedList getClients() const;

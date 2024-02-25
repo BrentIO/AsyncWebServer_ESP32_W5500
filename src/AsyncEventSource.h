@@ -94,7 +94,7 @@ class AsyncEventSourceClient
     AsyncClient *_client;
     AsyncEventSource *_server;
     uint32_t _lastId;
-    LinkedList<AsyncEventSourceMessage *> _messageQueue;
+    LinkedList_AsyncWebServer<AsyncEventSourceMessage *> _messageQueue;
     void _queueMessage(AsyncEventSourceMessage *dataMessage);
     void _runQueue();
 
@@ -152,7 +152,7 @@ class AsyncEventSource: public AsyncWebHandler
 {
   private:
     String _url;
-    LinkedList<AsyncEventSourceClient *> _clients;
+    LinkedList_AsyncWebServer<AsyncEventSourceClient *> _clients;
     ArEventHandlerFunction _connectcb;
 
   public:

@@ -377,9 +377,9 @@ class AsyncWebServerRequest
     size_t _contentLength;
     size_t _parsedLength;
 
-    LinkedList<AsyncWebHeader *> _headers;
-    LinkedList<AsyncWebParameter *> _params;
-    LinkedList<String *> _pathParams;
+    LinkedList_AsyncWebServer<AsyncWebHeader *> _headers;
+    LinkedList_AsyncWebServer<AsyncWebParameter *> _params;
+    LinkedList_AsyncWebServer<String *> _pathParams;
 
     uint8_t _multiParseState;
     uint8_t _boundaryPosition;
@@ -786,7 +786,7 @@ class AsyncWebServerResponse
 {
   protected:
     int _code;
-    LinkedList<AsyncWebHeader *> _headers;
+    LinkedList_AsyncWebServer<AsyncWebHeader *> _headers;
     String _contentType;
     size_t _contentLength;
     bool _sendContentLength;
@@ -832,8 +832,8 @@ class AsyncWebServer
 {
   protected:
     AsyncServer _server;
-    LinkedList<AsyncWebRewrite*> _rewrites;
-    LinkedList<AsyncWebHandler*> _handlers;
+    LinkedList_AsyncWebServer<AsyncWebRewrite*> _rewrites;
+    LinkedList_AsyncWebServer<AsyncWebHandler*> _handlers;
     AsyncCallbackWebHandler* _catchAllHandler;
 
   public:
@@ -880,7 +880,7 @@ class AsyncWebServer
 
 class DefaultHeaders
 {
-    using headers_t = LinkedList<AsyncWebHeader *>;
+    using headers_t = LinkedList_AsyncWebServer<AsyncWebHeader *>;
     headers_t _headers;
 
     /////////////////////////////////////////////////

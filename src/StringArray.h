@@ -68,7 +68,7 @@ class LinkedListNode
 /////////////////////////////////////////////////
 
 template <typename T, template<typename> class Item = LinkedListNode>
-class LinkedList
+class LinkedList_AsyncWebServer
 {
   public:
     typedef Item<T> ItemType;
@@ -136,8 +136,8 @@ class LinkedList
 
     /////////////////////////////////////////////////
 
-    LinkedList(OnRemove onRemove) : _root(nullptr), _onRemove(onRemove) {}
-    ~LinkedList() {}
+    LinkedList_AsyncWebServer(OnRemove onRemove) : _root(nullptr), _onRemove(onRemove) {}
+    ~LinkedList_AsyncWebServer() {}
 
     /////////////////////////////////////////////////
 
@@ -328,11 +328,11 @@ class LinkedList
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
-class StringArray : public LinkedList<String>
+class StringArray : public LinkedList_AsyncWebServer<String>
 {
   public:
 
-    StringArray() : LinkedList(nullptr) {}
+    StringArray() : LinkedList_AsyncWebServer(nullptr) {}
 
     /////////////////////////////////////////////////
 

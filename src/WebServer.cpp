@@ -52,11 +52,11 @@ bool ON_AP_FILTER(AsyncWebServerRequest *request)
 
 AsyncWebServer::AsyncWebServer(uint16_t port)
   : _server(port),
-    _rewrites(LinkedList<AsyncWebRewrite * >([](AsyncWebRewrite * r)
+    _rewrites(LinkedList_AsyncWebServer<AsyncWebRewrite * >([](AsyncWebRewrite * r)
 {
   delete r;
 })),
-_handlers(LinkedList<AsyncWebHandler*>([](AsyncWebHandler* h)
+_handlers(LinkedList_AsyncWebServer<AsyncWebHandler*>([](AsyncWebHandler* h)
 {
   delete h;
 }))

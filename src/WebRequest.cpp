@@ -72,15 +72,15 @@ AsyncWebServerRequest::AsyncWebServerRequest(AsyncWebServer* s, AsyncClient* c)
   , _expectingContinue(false)
   , _contentLength(0)
   , _parsedLength(0)
-  , _headers(LinkedList<AsyncWebHeader * >([](AsyncWebHeader * h)
+  , _headers(LinkedList_AsyncWebServer<AsyncWebHeader * >([](AsyncWebHeader * h)
 {
   delete h;
 }))
-, _params(LinkedList<AsyncWebParameter *>([](AsyncWebParameter *p)
+, _params(LinkedList_AsyncWebServer<AsyncWebParameter *>([](AsyncWebParameter *p)
 {
   delete p;
 }))
-, _pathParams(LinkedList<String *>([](String *p)
+, _pathParams(LinkedList_AsyncWebServer<String *>([](String *p)
 {
   delete p;
 }))

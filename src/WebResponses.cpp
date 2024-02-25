@@ -187,7 +187,7 @@ const char* AsyncWebServerResponse::_responseCodeToString(int code)
 
 AsyncWebServerResponse::AsyncWebServerResponse()
   : _code(0)
-  , _headers(LinkedList<AsyncWebHeader * >([](AsyncWebHeader * h)
+  , _headers(LinkedList_AsyncWebServer<AsyncWebHeader * >([](AsyncWebHeader * h)
 {
   delete h;
 }))

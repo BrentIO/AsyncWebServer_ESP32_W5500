@@ -631,11 +631,11 @@ const size_t AWSC_PING_PAYLOAD_LEN = 22;
 /////////////////////////////////////////////////
 
 AsyncWebSocketClient::AsyncWebSocketClient(AsyncWebServerRequest *request, AsyncWebSocket *server)
-  : _controlQueue(LinkedList<AsyncWebSocketControl * >([](AsyncWebSocketControl * c)
+  : _controlQueue(LinkedList_AsyncWebServer<AsyncWebSocketControl * >([](AsyncWebSocketControl * c)
 {
   delete  c;
 }))
-, _messageQueue(LinkedList<AsyncWebSocketMessage *>([](AsyncWebSocketMessage *m)
+, _messageQueue(LinkedList_AsyncWebServer<AsyncWebSocketMessage *>([](AsyncWebSocketMessage *m)
 {
   delete  m;
 }))
@@ -1235,13 +1235,13 @@ uint16_t AsyncWebSocketClient::remotePort()
 
 AsyncWebSocket::AsyncWebSocket(const String& url)
   : _url(url)
-  , _clients(LinkedList<AsyncWebSocketClient * >([](AsyncWebSocketClient * c)
+  , _clients(LinkedList_AsyncWebServer<AsyncWebSocketClient * >([](AsyncWebSocketClient * c)
 {
   delete c;
 }))
 , _cNextId(1)
 , _enabled(true)
-, _buffers(LinkedList<AsyncWebSocketMessageBuffer *>([](AsyncWebSocketMessageBuffer *b)
+, _buffers(LinkedList_AsyncWebServer<AsyncWebSocketMessageBuffer *>([](AsyncWebSocketMessageBuffer *b)
 {
   delete b;
 }))
