@@ -342,7 +342,7 @@ The best and easiest way is to use `Arduino Library Manager`. Search for `AsyncW
 
 ```cpp
 request->version();       // uint8_t: 0 = HTTP/1.0, 1 = HTTP/1.1
-request->method();        // enum:    HTTP_GET, HTTP_POST, HTTP_DELETE, HTTP_PUT, HTTP_PATCH, HTTP_HEAD, HTTP_OPTIONS
+request->method();        // enum:    ASYNC_HTTP_GET, ASYNC_HTTP_POST, ASYNC_HTTP_DELETE, ASYNC_HTTP_PUT, ASYNC_HTTP_PATCH, ASYNC_HTTP_HEAD, ASYNC_HTTP_OPTIONS
 request->url();           // String:  URL of the request (not including host, port or GET parameters)
 request->host();          // String:  The requested host (can be used for virtual hosting)
 request->contentType();   // String:  ContentType of the request (not available in Handler::canHandle)
@@ -1259,7 +1259,7 @@ void handleNotFound(AsyncWebServerRequest *request)
   //message += server.uri();
   message += request->url();
   message += "\nMethod: ";
-  message += (request->method() == HTTP_GET) ? "GET" : "POST";
+  message += (request->method() == ASYNC_HTTP_GET) ? "GET" : "POST";
   message += "\nArguments: ";
   message += request->args();
   message += "\n";
@@ -1319,7 +1319,7 @@ void setup()
   ///////////////////////////////////
 
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
   {
     handleRoot(request);
   });
@@ -1366,10 +1366,10 @@ public :
   void begin()
   {
     // attach global request handler
-    classWebServer.on("/example", HTTP_ANY, handleRequest);
+    classWebServer.on("/example", ASYNC_HTTP_ANY, handleRequest);
 
     // attach class request handler
-    classWebServer.on("/example", HTTP_ANY, std::bind(&WebClass::classRequest, this, std::placeholders::_1));
+    classWebServer.on("/example", ASYNC_HTTP_ANY, std::bind(&WebClass::classRequest, this, std::placeholders::_1));
   }
 };
 
@@ -1379,10 +1379,10 @@ WebClass webClassInstance;
 void setup() 
 {
   // attach global request handler
-  globalWebServer.on("/example", HTTP_ANY, handleRequest);
+  globalWebServer.on("/example", ASYNC_HTTP_ANY, handleRequest);
 
   // attach class request handler
-  globalWebServer.on("/example", HTTP_ANY, std::bind(&WebClass::classRequest, webClassInstance, std::placeholders::_1));
+  globalWebServer.on("/example", ASYNC_HTTP_ANY, std::bind(&WebClass::classRequest, webClassInstance, std::placeholders::_1));
 }
 
 void loop() 
@@ -1423,7 +1423,7 @@ This is one option:
 ```cpp
 webServer.onNotFound([](AsyncWebServerRequest *request) 
 {
-  if (request->method() == HTTP_OPTIONS) 
+  if (request->method() == ASYNC_HTTP_OPTIONS) 
   {
     request->send(200);
   } 
@@ -1442,7 +1442,7 @@ With path variable you can create a custom regex rule for a specific parameter i
 For example we want a `sensorId` parameter in a route rule to match only a integer.
 
 ```cpp
-server.on("^\\/sensor\\/([0-9]+)$", HTTP_GET, [] (AsyncWebServerRequest *request) 
+server.on("^\\/sensor\\/([0-9]+)$", ASYNC_HTTP_GET, [] (AsyncWebServerRequest *request) 
 {
     String sensorId = request->pathArg(0);
 });

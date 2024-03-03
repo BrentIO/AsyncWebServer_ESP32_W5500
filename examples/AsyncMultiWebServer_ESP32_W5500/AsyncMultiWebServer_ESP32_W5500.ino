@@ -142,7 +142,7 @@ String createNotFoundBuffer(AsyncWebServerRequest * request)
   message += F("URI: ");
   message += request->url();
   message += F("\nMethod: ");
-  message += (request->method() == HTTP_GET) ? F("GET") : F("POST");
+  message += (request->method() == ASYNC_HTTP_GET) ? F("GET") : F("POST");
   message += F("\nArguments: ");
   message += request->args();
   message += F("\n");
@@ -225,12 +225,12 @@ void setup()
       while (1);
     }
 
-    multiServer[serverIndex]->on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+    multiServer[serverIndex]->on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
     {
       handleRoot(request);
     });
 
-    multiServer[serverIndex]->on("/hello", HTTP_GET, [](AsyncWebServerRequest * request)
+    multiServer[serverIndex]->on("/hello", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
     {
       String message = F("Hello from AsyncMultiWebServer_ESP32_W5500 using W5500 Ethernet, running on ");
       message       += ARDUINO_BOARD;

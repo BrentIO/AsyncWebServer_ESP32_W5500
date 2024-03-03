@@ -115,7 +115,7 @@ AsyncStaticWebHandler& AsyncStaticWebHandler::setLastModified(struct tm* last_mo
 
 bool AsyncStaticWebHandler::canHandle(AsyncWebServerRequest *request)
 {
-  if (request->method() != HTTP_GET || !request->url().startsWith(_uri)
+  if (request->method() != ASYNC_HTTP_GET || !request->url().startsWith(_uri)
       || !request->isExpectedRequestedConnType(RCT_DEFAULT, RCT_HTTP) )
   {
     return false;

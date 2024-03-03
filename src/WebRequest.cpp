@@ -428,31 +428,31 @@ bool AsyncWebServerRequest::_parseReqHead()
 
   if (m == "GET")
   {
-    _method = HTTP_GET;
+    _method = ASYNC_HTTP_GET;
   }
   else if (m == "POST")
   {
-    _method = HTTP_POST;
+    _method = ASYNC_HTTP_POST;
   }
   else if (m == "DELETE")
   {
-    _method = HTTP_DELETE;
+    _method = ASYNC_HTTP_DELETE;
   }
   else if (m == "PUT")
   {
-    _method = HTTP_PUT;
+    _method = ASYNC_HTTP_PUT;
   }
   else if (m == "PATCH")
   {
-    _method = HTTP_PATCH;
+    _method = ASYNC_HTTP_PATCH;
   }
   else if (m == "HEAD")
   {
-    _method = HTTP_HEAD;
+    _method = ASYNC_HTTP_HEAD;
   }
   else if (m == "OPTIONS")
   {
-    _method = HTTP_OPTIONS;
+    _method = ASYNC_HTTP_OPTIONS;
   }
 
   String g = String();
@@ -1685,21 +1685,21 @@ String AsyncWebServerRequest::urlDecode(const String& text) const
 
 const char * AsyncWebServerRequest::methodToString() const
 {
-  if (_method == HTTP_ANY)
+  if (_method == ASYNC_HTTP_ANY)
     return "ANY";
-  else if (_method & HTTP_GET)
+  else if (_method & ASYNC_HTTP_GET)
     return "GET";
-  else if (_method & HTTP_POST)
+  else if (_method & ASYNC_HTTP_POST)
     return "POST";
-  else if (_method & HTTP_DELETE)
+  else if (_method & ASYNC_HTTP_DELETE)
     return "DELETE";
-  else if (_method & HTTP_PUT)
+  else if (_method & ASYNC_HTTP_PUT)
     return "PUT";
-  else if (_method & HTTP_PATCH)
+  else if (_method & ASYNC_HTTP_PATCH)
     return "PATCH";
-  else if (_method & HTTP_HEAD)
+  else if (_method & ASYNC_HTTP_HEAD)
     return "HEAD";
-  else if (_method & HTTP_OPTIONS)
+  else if (_method & ASYNC_HTTP_OPTIONS)
     return "OPTIONS";
 
   return "UNKNOWN";

@@ -109,7 +109,7 @@ void handleRoot(AsyncWebServerRequest *request)
 
 void handlePlain(AsyncWebServerRequest *request)
 {
-  if (request->method() != HTTP_POST)
+  if (request->method() != ASYNC_HTTP_POST)
   {
     digitalWrite(led, 1);
     request->send(405, "text/plain", "Method Not Allowed");
@@ -125,7 +125,7 @@ void handlePlain(AsyncWebServerRequest *request)
 
 void handleForm(AsyncWebServerRequest *request)
 {
-  if (request->method() != HTTP_POST)
+  if (request->method() != ASYNC_HTTP_POST)
   {
     digitalWrite(led, 1);
     request->send(405, "text/plain", "Method Not Allowed");
@@ -153,7 +153,7 @@ void handleNotFound(AsyncWebServerRequest *request)
   message += "URI: ";
   message += request->url();
   message += "\nMethod: ";
-  message += (request->method() == HTTP_GET) ? "GET" : "POST";
+  message += (request->method() == ASYNC_HTTP_GET) ? "GET" : "POST";
   message += "\nArguments: ";
   message += request->args();
   message += "\n";
@@ -217,19 +217,19 @@ void setup()
   ///////////////////////////////////
 
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
   {
     handleRoot(request);
   });
 
   //server.on("/postplain/", handlePlain);
-  server.on("/postplain/", HTTP_POST, [](AsyncWebServerRequest * request)
+  server.on("/postplain/", ASYNC_HTTP_POST, [](AsyncWebServerRequest * request)
   {
     handlePlain(request);
   });
 
   //server.on("/postform/", handleForm);
-  server.on("/postform/", HTTP_POST, [](AsyncWebServerRequest * request)
+  server.on("/postform/", ASYNC_HTTP_POST, [](AsyncWebServerRequest * request)
   {
     handleForm(request);
   });

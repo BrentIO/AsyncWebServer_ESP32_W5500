@@ -146,20 +146,20 @@ void setup()
 
   ///////////////////////////////////
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", "Hello, world from Async_RegexPatterns_ESP32_W5500 on " + String(ARDUINO_BOARD));
   });
 
   // Send a GET request to <IP>/sensor/<number>
-  server.on("^\\/sensor\\/([0-9]+)$", HTTP_GET, [] (AsyncWebServerRequest * request)
+  server.on("^\\/sensor\\/([0-9]+)$", ASYNC_HTTP_GET, [] (AsyncWebServerRequest * request)
   {
     String sensorNumber = request->pathArg(0);
     request->send(200, "text/plain", "Hello, sensor: " + sensorNumber);
   });
 
   // Send a GET request to <IP>/sensor/<number>/action/<action>
-  server.on("^\\/sensor\\/([0-9]+)\\/action\\/([a-zA-Z0-9]+)$", HTTP_GET, [] (AsyncWebServerRequest * request)
+  server.on("^\\/sensor\\/([0-9]+)\\/action\\/([a-zA-Z0-9]+)$", ASYNC_HTTP_GET, [] (AsyncWebServerRequest * request)
   {
     String sensorNumber = request->pathArg(0);
     String action = request->pathArg(1);

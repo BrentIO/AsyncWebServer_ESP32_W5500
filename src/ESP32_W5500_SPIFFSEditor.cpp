@@ -493,7 +493,7 @@ bool SPIFFSEditor::canHandle(AsyncWebServerRequest *request)
 {
   if (request->url().equalsIgnoreCase("/edit"))
   {
-    if (request->method() == HTTP_GET)
+    if (request->method() == ASYNC_HTTP_GET)
     {
       if (request->hasParam("list"))
         return true;
@@ -534,11 +534,11 @@ bool SPIFFSEditor::canHandle(AsyncWebServerRequest *request)
       return true;
     }
 
-    else if (request->method() == HTTP_POST)
+    else if (request->method() == ASYNC_HTTP_POST)
       return true;
-    else if (request->method() == HTTP_DELETE)
+    else if (request->method() == ASYNC_HTTP_DELETE)
       return true;
-    else if (request->method() == HTTP_PUT)
+    else if (request->method() == ASYNC_HTTP_PUT)
       return true;
   }
 
@@ -552,7 +552,7 @@ void SPIFFSEditor::handleRequest(AsyncWebServerRequest *request)
   if (_username.length() && _password.length() && !request->authenticate(_username.c_str(), _password.c_str()))
     return request->requestAuthentication();
 
-  if (request->method() == HTTP_GET)
+  if (request->method() == ASYNC_HTTP_GET)
   {
     if (request->hasParam("list"))
     {
@@ -611,7 +611,7 @@ void SPIFFSEditor::handleRequest(AsyncWebServerRequest *request)
       }
     }
   }
-  else if (request->method() == HTTP_DELETE)
+  else if (request->method() == ASYNC_HTTP_DELETE)
   {
     if (request->hasParam("path", true))
     {
@@ -621,14 +621,14 @@ void SPIFFSEditor::handleRequest(AsyncWebServerRequest *request)
     else
       request->send(404);
   }
-  else if (request->method() == HTTP_POST)
+  else if (request->method() == ASYNC_HTTP_POST)
   {
     if (request->hasParam("data", true, true) && _fs.exists(request->getParam("data", true, true)->value()))
       request->send(200, "", "UPLOADED: " + request->getParam("data", true, true)->value());
     else
       request->send(500);
   }
-  else if (request->method() == HTTP_PUT)
+  else if (request->method() == ASYNC_HTTP_PUT)
   {
     if (request->hasParam("path", true))
     {

@@ -123,7 +123,7 @@ void setup()
 
   ///////////////////////////////////
 
-	server.on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+	server.on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
 	{
 		if (!request->authenticate(www_username, www_password))
 		{

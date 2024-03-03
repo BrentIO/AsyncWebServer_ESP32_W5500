@@ -127,13 +127,13 @@ void setup()
 
   ///////////////////////////////////
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", "Hello, world from AsyncSimpleServer_ESP32_W5500");
   });
 
   // Send a GET request to <IP>/get?message=<message>
-  server.on("/get", HTTP_GET, [] (AsyncWebServerRequest * request)
+  server.on("/get", ASYNC_HTTP_GET, [] (AsyncWebServerRequest * request)
   {
     String message;
 
@@ -150,7 +150,7 @@ void setup()
   });
 
   // Send a POST request to <IP>/post with a form field message set to <message>
-  server.on("/post", HTTP_POST, [](AsyncWebServerRequest * request)
+  server.on("/post", ASYNC_HTTP_POST, [](AsyncWebServerRequest * request)
   {
     String message;
 

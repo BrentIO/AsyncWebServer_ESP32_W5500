@@ -89,7 +89,7 @@ void handleNotFound(AsyncWebServerRequest *request)
   //message += server.uri();
   message += request->url();
   message += "\nMethod: ";
-  message += (request->method() == HTTP_GET) ? "GET" : "POST";
+  message += (request->method() == ASYNC_HTTP_GET) ? "GET" : "POST";
   message += "\nArguments: ";
   message += request->args();
   message += "\n";
@@ -149,7 +149,7 @@ void setup()
   ///////////////////////////////////
 
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/", ASYNC_HTTP_GET, [](AsyncWebServerRequest * request)
   {
     handleRoot(request);
   });
