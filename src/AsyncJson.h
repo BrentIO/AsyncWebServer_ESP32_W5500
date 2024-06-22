@@ -461,6 +461,11 @@ class AsyncCallbackJsonWebHandler: public AsyncWebHandler
     {
       if (_onRequest)
       {
+        if(total == 1 && strcmp("{", (const char*)data) == 0){
+          _contentLength = 0;
+          return;
+        }
+
         _contentLength = total;
 
         if (total > 0 && request->_tempObject == NULL && total < _maxContentLength)
