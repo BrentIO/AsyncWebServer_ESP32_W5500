@@ -322,9 +322,9 @@ class AsyncCallbackJsonWebHandler: public AsyncWebHandler
       : _uri(uri), _method(ASYNC_HTTP_POST | ASYNC_HTTP_PUT | ASYNC_HTTP_PATCH), _onRequest(onRequest), _maxContentLength(16384) {}
 #else
     AsyncCallbackJsonWebHandler(const String& uri, ArJsonRequestHandlerFunction onRequest,
-                                size_t maxJsonBufferSize = DYNAMIC_JSON_DOCUMENT_SIZE)
+                                size_t maxJsonBufferSize = DYNAMIC_JSON_DOCUMENT_SIZE, size_t maxContentLength = 16384)
       : _uri(uri), _method(ASYNC_HTTP_POST | ASYNC_HTTP_PUT | ASYNC_HTTP_PATCH), _onRequest(onRequest), maxJsonBufferSize(maxJsonBufferSize),
-        _maxContentLength(16384) {}
+        _maxContentLength(maxContentLength) {}
 #endif
 
     /////////////////////////////////////////////////
