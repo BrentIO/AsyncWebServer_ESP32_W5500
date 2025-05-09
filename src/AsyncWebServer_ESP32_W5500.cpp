@@ -75,7 +75,7 @@ void ESP32_W5500_event(WiFiEvent_t event)
     case ARDUINO_EVENT_ETH_START:
       AWS_LOG(F("\nETH Started"));
       //set eth hostname here
-      ETH.setHostname("ESP32_W5500");
+      //ETH.setHostname("ESP32_W5500");
       break;
 
     case ARDUINO_EVENT_ETH_CONNECTED:
@@ -132,7 +132,7 @@ void ESP32_W5500_event(WiFiEvent_t event)
     case SYSTEM_EVENT_ETH_START:
       AWS_LOG(F("\nETH Started"));
       //set eth hostname here
-      ETH.setHostname("ESP32_W5500");
+      //ETH.setHostname("ESP32_W5500");
       break;
 
     case SYSTEM_EVENT_ETH_CONNECTED:
