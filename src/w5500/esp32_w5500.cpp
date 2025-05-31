@@ -58,8 +58,6 @@ bool ESP32_W5500::begin(int MISO, int MOSI, int SCLK, int CS, int INT, int SPICL
 {
   tcpipInit();
 
-  esp_base_mac_addr_set( W5500_Mac );
-
   tcpip_adapter_set_default_eth_handlers();
 
   esp_netif_config_t cfg = ESP_NETIF_DEFAULT_ETH();
