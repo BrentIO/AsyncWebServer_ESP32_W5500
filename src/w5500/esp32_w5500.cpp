@@ -356,27 +356,6 @@ uint8_t ESP32_W5500::linkSpeed()
 
 ////////////////////////////////////////
 
-bool ESP32_W5500::enableIpV6()
-{
-  return tcpip_adapter_create_ip6_linklocal(TCPIP_ADAPTER_IF_ETH) == 0;
-}
-
-////////////////////////////////////////
-
-IPv6Address ESP32_W5500::localIPv6()
-{
-  static ip6_addr_t addr;
-
-  if (tcpip_adapter_get_ip6_linklocal(TCPIP_ADAPTER_IF_ETH, &addr))
-  {
-    return IPv6Address();
-  }
-
-  return IPv6Address(addr.addr);
-}
-
-////////////////////////////////////////
-
 uint8_t * ESP32_W5500::macAddress(uint8_t* mac)
 {
   if (!mac)
