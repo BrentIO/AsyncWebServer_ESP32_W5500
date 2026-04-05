@@ -101,14 +101,20 @@ static bool getMD5(uint8_t * data, uint16_t len, char * output)
   mbedtls_md5_init(&_ctx);
 
 #if (MBEDTLS_VERSION_NUMBER < 0x02070000)
-  // Superseded from v2.7.0
+  // Before v2.7.0 — no return value
   mbedtls_md5_starts(&_ctx);
   mbedtls_md5_update(&_ctx, data, len);
   mbedtls_md5_finish(&_ctx, _buf);
-#else
+#elif (MBEDTLS_VERSION_NUMBER < 0x03000000)
+  // v2.7.0–v2.x — _ret variants introduced
   mbedtls_md5_starts_ret(&_ctx);
   mbedtls_md5_update_ret(&_ctx, data, len);
   mbedtls_md5_finish_ret(&_ctx, _buf);
+#else
+  // v3.0.0+ — _ret variants removed; non-_ret restored (now returns int)
+  mbedtls_md5_starts(&_ctx);
+  mbedtls_md5_update(&_ctx, data, len);
+  mbedtls_md5_finish(&_ctx, _buf);
 #endif
 
   for (i = 0; i < 16; i++)
