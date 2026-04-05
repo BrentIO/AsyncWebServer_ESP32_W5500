@@ -78,8 +78,8 @@ class ESP32_W5500
     uint8_t * macAddress(uint8_t* mac);
     String macAddress();
 
-    friend class WiFiClient;
-    friend class WiFiServer;
+    friend class NetworkClient;
+    friend class NetworkServer;
 };
 
 ////////////////////////////////////////
