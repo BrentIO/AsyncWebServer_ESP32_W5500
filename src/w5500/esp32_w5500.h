@@ -66,9 +66,6 @@ class ESP32_W5500
     bool linkUp();
     uint8_t linkSpeed();
 
-    bool enableIpV6();
-    IPv6Address localIPv6();
-
     IPAddress localIP();
     IPAddress subnetMask();
     IPAddress gatewayIP();
